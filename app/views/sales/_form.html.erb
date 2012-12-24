@@ -1,0 +1,28 @@
+<%= form_for([@store,@sale]) do |f| %>
+  <% if @sale.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+      <ul>
+      <% @sale.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    
+
+    <% Product.produtos_novos(@store).each do |p| %>
+      
+      <p>
+        <%= check_box_tag "product_ids[]", p[:id], false, :id => "product_ids_#{p[:id]}"  %>      
+        <%= p["name"] %>
+      </p>
+    <% end %>    
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
